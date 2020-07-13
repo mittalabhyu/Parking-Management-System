@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jul 12 21:00:00 2020
+
+@author: HP
+"""
+
+from flask import Flask, render_template,request,session,redirect
+from flask_pymongo import PyMongo
+from pymongo import MongoClient
+from datetime import datetime
+
+
+
+client=MongoClient("mongodb+srv://mittalabhyu:Mittal@cluster0.ocodw.mongodb.net/pms?retryWrites=true&w=majority")
+db=client.get_database('pms')
+app = Flask(__name__)
+@app.route("/")
+def home():
+    
+   
+    return render_template('index.html')
+@app.route("/login")
+def login():
+    
+   
+    return render_template('login.html')
+@app.route("/register")
+
+def register():
+    
+   
+    return render_template('register.html')
+
+@app.route("/registered",methods=['GET','POST'])
+def registered():
+    if request.method=='POST':
+        username=request.form.get('user')
+        name=request.form.get('name')
+        email=request.form.get('email')
+        mobile=request.form.get('mob')
+        address=request.form.get('add')
+        password=request.form.get('password')
+        dic={"name":name,"username":username,"password":password,"mob":mobile,"email":email,"address":address}
+        qq=db.user
+        qq.insert_one(dic)
+        
+   
+    return render_template('register.html')
+@app.route("/entry",methods=['GET','POST'])
+def entry():
+    if request.method=='POST':
+        username=request.form.get('userid')
+        password=request.form.get('password')
+        qw=db.user
+        k5=list(qw.find({"username":username}))
+        if(len(k5)!=0 and password==k5[0]["password"]):
+            return render_template('entry.html',k5=k5)
+   
+    return render_template('login.html')
+@app.route("/add",methods=['GET','POST'])
+def add():
+    if request.method=='POST':
+        no=request.form.get('number')
+        name=request.form.get('name')
+        dt=datetime.now()
+        qww=db.data
+        dd={"name":name,"number":no,"entry":dt,"exit":"b"}
+        qww.insert_one(dd)
+    
+    return render_template('add.html')
+    
+     
+@app.route("/exit",methods=['GET','POST'])
+def exitt():
+    if request.method=='POST':
+        no=request.form.get('number')
+        
+        dt=datetime.now()
+        qww=db.data
+        dd={"name":name,"number":no,"entry":dt,"exit":"b"}
+        qww.insert_one(dd)
+    
+   
+    return render_template('exit.html')
+@app.route("/history")
+def history():
+    
+   
+    return render_template('history.html')
+app.run(debug=True)
