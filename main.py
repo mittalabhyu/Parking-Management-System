@@ -11,10 +11,10 @@ from pymongo import MongoClient
 from datetime import datetime
 
 
-
+app = Flask(__name__)
 client=MongoClient("mongodb+srv://mittalabhyu:Mittal@cluster0.ocodw.mongodb.net/pms?retryWrites=true&w=majority")
 db=client.get_database('pms')
-app = Flask(__name__)
+
 @app.route("/")
 def home():
     
@@ -47,25 +47,46 @@ def registered():
         
    
     return render_template('register.html')
+@app.route("/logout")
+def logout():
+    te=db.cu
+    te.delete_many({})
+    return render_template('login.html')
 @app.route("/entry",methods=['GET','POST'])
 def entry():
+    tr=db.cu
     if request.method=='POST':
         username=request.form.get('userid')
         password=request.form.get('password')
         qw=db.user
         k5=list(qw.find({"username":username}))
         if(len(k5)!=0 and password==k5[0]["password"]):
+            
+            de={"username":username}
+            tr.insert_one(de)
             return render_template('entry.html',k5=k5)
+        else:
+            return render_template('login.html')
+    k7=list(tr.find())
+    users=k7[0]["username"]
+    qs=db.user
+    k6=list(qs.find({"username":users}))
+    
    
-    return render_template('login.html')
+    return render_template('entry.html',k5=k6)
 @app.route("/add",methods=['GET','POST'])
 def add():
     if request.method=='POST':
         no=request.form.get('number')
         name=request.form.get('name')
+        gg=db.cu
+        k1=list(gg.find())
+        users=k1[0]["username"]
+        qs=db.user
+        k6=list(qs.find({"username":users}))
         dt=datetime.now()
         qww=db.data
-        dd={"name":name,"number":no,"entry":dt,"exit":"b"}
+        dd={"name":name,"number":no,"org":k6[0]["name"],"exit":"b","entry":dt}
         qww.insert_one(dd)
     
     return render_template('add.html')
