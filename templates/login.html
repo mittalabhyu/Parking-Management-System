@@ -8,6 +8,20 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<title>Login-Page</title>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script>
+        function validateForm() {
+            var x = document.forms["myform"]["userid"].value;
+            if (x == "") {
+                alert("Username must be filled out");
+                return false;
+            }
+            var y = document.forms["myform"]["password"].value;
+            if (y == "" || y == null) {
+                alert("Password must be filled out");
+                return false;
+            }
+        }
+    </script>
 </head>
 <style>
 body{
@@ -24,6 +38,9 @@ body{
      </table>
 <div class="serif" style="background-color: black;">
 <h1 id="h1" style="text-align: center; color:red; font-weight: bold;">LOGIN</h1></div>
+{% if flag ==1 %}
+<h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Invalid Login</h2></div>
+{% endif %}
 <br>
  <div class="container-fluid">  
  <div class="row-md row-sm row-xs">
@@ -31,7 +48,7 @@ body{
     <div>
    <center>
     <font size="4" style="color: black;">
-    <form action="/entry" method="post">
+    <form name="myform" action="/entry" method="post"  onsubmit="return validateForm()">
     Username:<br>
     <input type="text" name="userid"placeholder="Username"style="color: black;">
     <br>
@@ -40,14 +57,8 @@ body{
     <input type="password" name="password"placeholder="Password">
     <br>
     <br>
-    Choose Slot:<br>
-    <select name="slot" style="color: black;"placeholder="select">
     
-    <option value="Day" >Day</option>
-    <option value="Night" >Night</option>
-    </select>
-    <br>
-    <br>
+    
     <input  style="background:red; color: black;"type="submit" value="Login">
   </form>
   </font>

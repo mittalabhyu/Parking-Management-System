@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="{{ url_for('static', filename='img/favicon.ico')}}" rel="icon">
+    <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <title>Login History</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        background-image: url("https://coolbackgrounds.io/images/backgrounds/black/pure-black-background-f82588d3.jpg");
+    }
+</style>
+<body>
+    <h1 id="h1" style="text-align: center; color:red; font-weight: bold;"> Login HISTORY SHOW</h1></div>
+    <br>
+    <br><br>
+     <table id="t1" border="1" width="10%" align="center">
+             <tr style="background-color:red;">
+                <td class="b1"><a id="a1" href="/entry">Home</a></td>
+             </tr>
+     </table>
+     <br>
+     
+     <br>
+     <br>
+    <table class="table">
+    <thead>
+      <tr>
+        <th style="color: red;">username</th>
+        <th style="color: red;">Login</th>
+        <th style="color: red;">Logout</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in k5 %} 
+      <tr>
+        <td style="color: red;">{{p["username"]}}</td>
+        <td style="color: red;">{{p["login"]}}</td>
+        <td style="color: red;">{{p["logout"]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+    <br>
+
+</body>
+</html>

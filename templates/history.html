@@ -8,6 +8,15 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<title>History</title>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script>
+        function validateForm() {
+            var x = document.forms["hisform"]["number"].value;
+            if (x == "") {
+                alert("Vehicle Number must be filled out");
+                return false;
+            }
+        }
+    </script>
 </head>
 <style>
 body{
@@ -24,6 +33,9 @@ body{
      </table>
 <div class="serif" style="background-color: black;">
 <h1 id="h1" style="text-align: center; color:red; font-weight: bold;">HISTORY CHECK</h1></div>
+{% if flag ==1 %}
+<h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Number Not Found</h2></div>
+{% endif %}
 <br>
  <div class="container-fluid">  
  <div class="row-md row-sm row-xs">
@@ -31,11 +43,11 @@ body{
   <div>
    <center>
     <font size="4" style="color: grey;">
-    <form action="" method="post">
+    <form name="hisform" action="/history" method="post" onsubmit="return validateForm()">
 
     <br>
     Vehicle Number<br>
-    <input type="text" name="v-number">
+    <input type="text" name="number">
     <br>
     <br>
     <input style="background:red; color: black;"type="submit" value="Submit">

@@ -8,6 +8,20 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
   <title>Add Vehicle</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        function validateForm() {
+            var x = document.forms["addform"]["number"].value;
+            if (x == "") {
+                alert("Vehicle Number must be filled out");
+                return false;
+            }
+            var y = document.forms["addform"]["name"].value;
+            if (y == "" || y == null) {
+                alert("Driver Name must be filled out");
+                return false;
+            }
+        }
+    </script>
 </head>
 <style>
 body{
@@ -24,6 +38,9 @@ body{
      </table>
 <div class="serif" style="background-color: black;">
 <h1 id="h1" style="text-align: center; color:red; font-weight: bold;">ADD VEHICLE</h1></div>
+{% if flag ==1 %}
+<h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Added Successfully</h2></div>
+{% endif %}
 <br>
  <div class="container-fluid">  
  <div class="row-md row-sm row-xs">
@@ -31,7 +48,7 @@ body{
   <div>
    <center>
     <font size="4" style="color: grey;">
-    <form action="/add" method="post">
+    <form name="addform"action="/add" method="post"onsubmit="return validateForm()">
   
     <br>
     Vehicle Number<br>

@@ -8,6 +8,15 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<title>Exit-Vehicle</title>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        function validateForm() {
+            var x = document.forms["exitform"]["number"].value;
+            if (x == "") {
+                alert("Vehicle Number must be filled out");
+                return false;
+            }
+        }
+    </script>
 </head>
 <style>
 body{
@@ -24,7 +33,9 @@ body{
      </table>
 <div class="serif" style="background-color: black;">
 <h1 id="h1" style="text-align: center; color:red; font-weight: bold;">EXIT VEHICLE</h1></div>
-<p  style="text-align: center; color:red; font-weight: bold;">Enter Vehicle Number <br></p>
+{% if flag ==1 %}
+<h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Updated Successfully</h2></div>
+{% endif %}
 
 <br>
  <div class="container-fluid">  
@@ -33,7 +44,7 @@ body{
   <div>
    <center>
     <font size="4" style="color: grey;">
-    <form action="/exit" method="post">
+    <form name="exitform"action="/exit" method="post"onsubmit="return validateForm()">
   
     <br>
     Vehicle Number<br>
@@ -44,6 +55,7 @@ body{
   </form>
   </font>
 </center>
+
 </div>
 </div>
 </div>

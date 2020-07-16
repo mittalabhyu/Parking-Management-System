@@ -8,6 +8,44 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <title>Parking Management System</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        function validateForm() {
+            var x = document.forms["regForm"]["name"].value;
+            if (x == "" || x == null) {
+                alert("Organisation Name must be filled out");
+                return false;
+            }
+            var b = document.forms["regForm"]["mob"].value;
+            if (b == "" || b == null) {
+                alert("Mobile Number must be filled out");
+                return false;
+            }
+            var z = document.forms["regForm"]["add"].value;
+            if (z == "" || z == null) {
+                alert("Address must be filled out");
+                return false;
+            }
+            var y = document.forms["regForm"]["email"].value;
+            if (y == "" || y == null) {
+                alert("Email must be filled out");
+                return false;
+            }
+
+            var a = document.forms["regForm"]["user"].value;
+            if (a == "" || a == null) {
+                alert("Username must be filled out");
+                return false;
+            }
+
+            var c = document.forms["regForm"]["password"].value;
+            if (c == "" || c == null) {
+                alert("Password must be filled out ");
+                return false;
+            }
+        }
+
+    </script>
+
 </head>
 <style>
     body {
@@ -28,16 +66,23 @@
                
                     <div class="paragraph">
                         <h1 class="serif" id="headings" style="text-align:center; color:red;">Register</h1>
+                        {% if flag ==1 %}
+                            <h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Registered Successfully</h2></div>
+                        {% endif %}
+                        {% if f ==1 %}
+                            <h2 id="h2" style="text-align: center; color:red; font-weight: bold;">Error! {{h}}</h2>
+                       {% endif %}
+                        </div>
                         <div>
                             <center>
                                 <font size="4" style="color: grey;">
-                                    <form action="/registered" method="post">
+                                    <form name="regForm"action="/registered" method="post" onsubmit="return validateForm();">
                                         Organization Name<br>
                                         <input type="text" name="name">
                                         <br>
                                         <br>
                                         Moblie No.<br>
-                                        <input type="text" name="mob">
+                                        <input type="Number" name="mob">
                                         <br>
                                         <br>
                                         Address<br>
@@ -45,7 +90,7 @@
                                         <br>
                                         <br>
                                         Email<br>
-                                        <input type="text" name="email">
+                                        <input type="email" name="email">
                                         <br>
                                         <br>
                                         Username<br>
