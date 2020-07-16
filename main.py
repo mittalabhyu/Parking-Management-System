@@ -169,4 +169,4 @@ def historylogin():
     k5=list(gt.find({"username":users}))
    
     return render_template('loginhist.html',k5=k5)
-app.run(debug=True)
+
